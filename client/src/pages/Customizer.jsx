@@ -8,7 +8,7 @@ import { download } from '../assets';
 import {downloadCanvasToImage, reader } from '../config/helpers';
 import { EditorTabs, FilterTabs, DecalTypes } from '../config/constants';
 import { fadeAnimation, slideAnimation } from '../config/motion';
-import { AIPicker, ColorPicker, FilePicker, CustomButton, Tab } from '../components';
+import { AIPicker, ColorPicker, FilePicker, CustomButton, Tab, Preset } from '../components';
 
 
 const Customizer = () => {
@@ -44,9 +44,23 @@ const Customizer = () => {
             generatingImg={generatingImg}
             handleSubmit ={handleSubmit}
           />
+
+        case "preset":
+          return <Preset 
+          handleFile ={handleFile}
+          setFile={setFile}
+          />
         
           default:
           return null;
+      }
+    }
+  const handleFile = (type, filePath) => {
+      {
+        const reader = new FileReader();
+        const fileData = reader.readAsArrayBuffer(filePath)
+        handleDecals(type,fileData);
+        setActiveEditorTab("");
       }
     }
 
@@ -118,6 +132,7 @@ const Customizer = () => {
     .then ((result)=> {
       handleDecals(type,result);
       setActiveEditorTab("");
+      console.log(result);
     })
   }
 
