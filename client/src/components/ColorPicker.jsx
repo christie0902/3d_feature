@@ -12,6 +12,7 @@ const ColorPicker = () => {
       <SketchPicker
       color={snap.color}
       disableAlpha
+      //set preset colors on the picker
       presetColors={[
         "#ccc",
         "#EFBD4E",
