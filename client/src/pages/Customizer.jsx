@@ -10,6 +10,7 @@ import { EditorTabs, FilterTabs, DecalTypes } from '../config/constants';
 import { fadeAnimation, slideAnimation } from '../config/motion';
 import { AIPicker, ColorPicker, FilePicker, CustomButton, Tab } from '../components';
 
+
 const Customizer = () => {
   const snap = useSnapshot(state);
   const [file, setFile] = useState('');
