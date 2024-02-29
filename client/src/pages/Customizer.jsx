@@ -47,6 +47,7 @@ const Customizer = () => {
 
         case "preset":
           return <Preset 
+          file = {file}
           handleFile ={handleFile}
           setFile={setFile}
           />
@@ -55,11 +56,8 @@ const Customizer = () => {
           return null;
       }
     }
-  const handleFile = (type, filePath) => {
-      {
-        const reader = new FileReader();
-        const fileData = reader.readAsArrayBuffer(filePath)
-        handleDecals(type,fileData);
+  const handleFile = (type, filePath) => {{
+        handleDecals(type, filePath);
         setActiveEditorTab("");
       }
     }
@@ -132,7 +130,7 @@ const Customizer = () => {
     .then ((result)=> {
       handleDecals(type,result);
       setActiveEditorTab("");
-      console.log(result);
+      // console.log(result);
     })
   }
 
