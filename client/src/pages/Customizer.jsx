@@ -37,13 +37,13 @@ const Customizer = () => {
 
           />
           
-        case "aipicker":
-          return <AIPicker 
-            prompt = {prompt}
-            setPrompt={setPrompt}
-            generatingImg={generatingImg}
-            handleSubmit ={handleSubmit}
-          />
+        // case "aipicker":
+        //   return <AIPicker 
+        //     prompt = {prompt}
+        //     setPrompt={setPrompt}
+        //     generatingImg={generatingImg}
+        //     handleSubmit ={handleSubmit}
+        //   />
 
         case "preset":
           return <Preset 
@@ -62,34 +62,34 @@ const Customizer = () => {
       }
     }
 
-  const handleSubmit = async (type) => {
-    if(!prompt) return alert("Please enter a prompt!");
+  // const handleSubmit = async (type) => {
+  //   if(!prompt) return alert("Please enter a prompt!");
 
-    try {
-        //call backend to generate an AI image
-        setGeneratingImg(true);
+  //   try {
+  //       //call backend to generate an AI image
+  //       setGeneratingImg(true);
 
-        const response = await fetch('http://localhost:5000/api/v1/dalle', {
-          method: 'POST',
-          headers: {
-          'Content-Type' : 'application/json'
-        },
-         body: JSON.stringify({
-          prompt,
-         })
-    })
+  //       const response = await fetch('http://localhost:5000/api/v1/dalle', {
+  //         method: 'POST',
+  //         headers: {
+  //         'Content-Type' : 'application/json'
+  //       },
+  //        body: JSON.stringify({
+  //         prompt,
+  //        })
+  //   })
 
-        const imgURL = await response.json()
+  //       const imgURL = await response.json()
 
-        handleDecals(type, imgURL)
+  //       handleDecals(type, imgURL)
         
-    } catch (error) {
-        alert(error)
-    } finally {
-        setGeneratingImg(false);
-        setActiveEditorTab("")
-    }
-  }
+  //   } catch (error) {
+  //       alert(error)
+  //   } finally {
+  //       setGeneratingImg(false);
+  //       setActiveEditorTab("")
+  //   }
+  // }
   
   const handleDecals = (type,result) =>
   {
@@ -186,7 +186,13 @@ const Customizer = () => {
                     tab={tab}
                     isFilterTab
                     isActiveTab={activeFilterTab[tab.name]}
-                    handleClick = {()=> handleActiveFilterTab(tab.name)}
+                    handleClick = {()=> {
+                      if (tab.name === "download") {
+                        downloadCanvasToImage();
+                      } else {
+                      handleActiveFilterTab(tab.name)}
+                      }
+                    }
                   />
                 ))}
           </motion.div>
